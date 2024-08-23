@@ -44,15 +44,17 @@ const ProductCard = ({ product }: Props) => {
         </p>
         <SideBar />
       </div>
-      <div className="border-t border-t-borderColor py-2 px-4 flex flex-col gap-y-1">
-        <p className="text-sm text-lightText capitalize font-medium">
-          {product?.category}
-        </p>
+      <div className="border-t border-t-borderColor py-2 px-4 flex flex-col justify-between h-40">
+        <div className="flex flex-col ">
+          <p className="text-sm text-lightText capitalize font-medium">
+            {product?.category}
+          </p>
 
-        <h2 className="font-semibold text-base line-clamp-2">
-          {product?.title}
-        </h2>
-        <p className="font-semibold text-skyColor">${product?.price}</p>
+          <h2 className="font-semibold text-base line-clamp-2">
+            {product?.title}
+          </h2>
+          <p className="font-semibold text-skyColor">${product?.price}</p>
+        </div>
         <AddToCartButton />
       </div>
     </div>

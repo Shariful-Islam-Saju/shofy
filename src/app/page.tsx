@@ -8,7 +8,6 @@ export default async function Home() {
 
   return (
     <main>
-      <BottomHeader />
       <Banner />
       <ProductList product={product} />
     </main>
