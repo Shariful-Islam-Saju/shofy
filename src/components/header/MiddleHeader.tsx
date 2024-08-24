@@ -10,11 +10,14 @@ import Link from "next/link";
 import { logo } from "@/assets";
 import { RiMenu3Fill } from "react-icons/ri";
 import { signIn, useSession } from "next-auth/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "@/redux/shofySlice";
+import { ProductType, StateType } from "../../../type";
 
 const MiddleHeader = () => {
   const dispatch = useDispatch();
+  const { cart } = useSelector((state: StateType) => state?.shopy);
+
   const { data: session } = useSession();
   const [searchValue, setSearchValue] = useState("");
 
@@ -100,7 +103,7 @@ const MiddleHeader = () => {
           <Link href="/cart" className="text-2xl relative">
             <BiShoppingBag />
             <span className="absolute -top-1 -right-1 text-[10px] font-medium w-4 h-4 bg-themeColor text-white rounded-full flex items-center justify-center">
-              0
+              {cart?.length > 0 ? cart?.length : "0"}
             </span>
           </Link>
         </div>

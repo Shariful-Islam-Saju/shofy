@@ -55,7 +55,7 @@ const ProductCard = ({ product }: Props) => {
           </h2>
           <p className="font-semibold text-skyColor">${product?.price}</p>
         </div>
-        <AddToCartButton />
+        <AddToCartButton product={product} />
       </div>
     </div>
   );
