@@ -6,6 +6,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { LuEye } from "react-icons/lu";
 import Button from "./ui/Button";
 import AddToCartButton from "./AddToCartButton";
+import Link from "next/link";
 
 interface Props {
   product: ProductType;
@@ -30,7 +31,13 @@ const SideBar = () => {
 const ProductCard = ({ product }: Props) => {
   return (
     <div className="border border-borderColor hover:shadow-lg hover:shadow-black/30 duration-300 rounded-md group overflow-hidden">
-      <div className=" relative">
+      <Link
+        href={{
+          pathname: `/products/${product?.id}`,
+          query: { id: product?.id },
+        }}
+        className=" relative"
+      >
         <Image
           src={product?.images[0]}
           alt="product-image"
@@ -43,7 +50,7 @@ const ProductCard = ({ product }: Props) => {
           <MdStar />
         </p>
         <SideBar />
-      </div>
+      </Link>
       <div className="border-t border-t-borderColor py-2 px-4 flex flex-col justify-between h-40">
         <div className="flex flex-col ">
           <p className="text-sm text-lightText capitalize font-medium">
