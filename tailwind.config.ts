@@ -1,3 +1,4 @@
+import defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -8,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Jost", ...defaultTheme.fontFamily.sans],
+        titleFont: ["Open Sans", "sans-serif"],
+        bodyFont: ["Montserrat", "sans-serif"],
+      },
       colors: {
         themeColor: "#0C55AA",
         lightBg: "#f4f7f9",
