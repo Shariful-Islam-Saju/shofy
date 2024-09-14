@@ -24,7 +24,7 @@ const CartProducts = () => {
                 ))}
               </div>
             </section>
-            <CartSummary />
+            <CartSummary cart={cart} />
           </div>
         </>
       ) : (

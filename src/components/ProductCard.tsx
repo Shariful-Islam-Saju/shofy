@@ -7,6 +7,8 @@ import { LuEye } from "react-icons/lu";
 import Button from "./ui/Button";
 import AddToCartButton from "./AddToCartButton";
 import Link from "next/link";
+import PriceFormat from "./PriceFormat";
+import ProductPrice from "./ProductPrice";
 
 interface Props {
   product: ProductType;
@@ -29,6 +31,8 @@ const SideBar = () => {
 };
 
 const ProductCard = ({ product }: Props) => {
+  const regularPrice = product?.price;
+  const discountedPrice = product?.price + product?.discountPercentage / 100;
   return (
     <div className="border border-borderColor hover:shadow-lg hover:shadow-black/30 duration-300 rounded-md group overflow-hidden">
       <Link
@@ -43,11 +47,12 @@ const ProductCard = ({ product }: Props) => {
           alt="product-image"
           width={500}
           height={500}
+          priority={true}
           className="w-full h-64 object-contain hover:scale-110 duration-300"
         />
         <p className="absolute top-2 right-2 bg-orange-600 text-white py-1 px-2 text-xs rounded-lg flex items-center">
-          {product?.rating}
-          <MdStar />
+          {/* {product?.rating} */}
+          {product?.discountPercentage}%{/* <MdStar /> */}
         </p>
         <SideBar />
       </Link>
@@ -60,7 +65,11 @@ const ProductCard = ({ product }: Props) => {
           <h2 className="font-semibold text-base line-clamp-2">
             {product?.title}
           </h2>
-          <p className="font-semibold text-skyColor">${product?.price}</p>
+          <ProductPrice
+            regularPrice={regularPrice}
+            discountedPrice={discountedPrice}
+            product={product}
+          />
         </div>
         <AddToCartButton product={product} />
       </div>

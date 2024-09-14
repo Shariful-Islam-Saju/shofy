@@ -54,7 +54,7 @@ const AddToCartButton = ({ product }: PropsType) => {
   return (
     <>
       {existingProduct ? (
-        <div className="flex items-center justify-between h-10 rounded-full">
+        <div className="flex items-center gap-x-5 h-10 rounded-full">
           <button
             disabled={existingProduct?.quantity === 1}
             onClick={handleMinus}
