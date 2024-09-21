@@ -11,11 +11,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
 interface PropsType {
   product?: ProductType;
+  className?: string;
 }
 
-const AddToCartButton = ({ product }: PropsType) => {
+const AddToCartButton = ({ product, className }: PropsType) => {
   const { cart } = useSelector((state: StateType) => state?.shopy);
   const [existingProduct, setExistingProduct] = useState<ProductType | null>(
     null
@@ -54,7 +56,12 @@ const AddToCartButton = ({ product }: PropsType) => {
   return (
     <>
       {existingProduct ? (
-        <div className="flex items-center gap-x-5 h-10 rounded-full">
+        <div
+          className={twMerge(
+            "flex items-center gap-x-5 h-10 rounded-full",
+            className
+          )}
+        >
           <button
             disabled={existingProduct?.quantity === 1}
             onClick={handleMinus}
