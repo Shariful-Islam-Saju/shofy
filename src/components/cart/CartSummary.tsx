@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import PriceFormat from "../PriceFormat";
 import { ProductType } from "../../../type";
 import { useSession } from "next-auth/react";
+import { loadStripe } from "@stripe/stripe-js";
 
 interface Props {
   cart: ProductType[];
@@ -28,18 +29,29 @@ const CartSummary = ({ cart }: Props) => {
     setDiscountAmt(discount);
   }, [cart]);
 
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+  );
+
   const handleCheckout = async () => {
+    const stripe = await stripePromise;
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        item: cart,
+        items: cart,
         email: session?.user?.email,
       }),
     });
-    console.log("res", await response?.json());
+    const checkoutSession = await response?.json();
+    const result: any = await stripe?.redirectToCheckout({
+      sessionId: checkoutSession.id,
+    });
+    if (result.error) {
+      alert(result?.error?.message);
+    }
   };
 
   return (
